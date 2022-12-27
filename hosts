@@ -1,5 +1,4 @@
 127.0.0.1 k8s.local
-127.0.0.1 argo.k8s.local
-127.0.0.1 cd.argo.k8s.local
-127.0.0.1 rollouts.argo.k8s.local
-127.0.0.1 viz.k8s.local
+127.0.0.1 argo.local
+127.0.0.1 cd.argo.local
+127.0.0.1 rollouts.argo.local
