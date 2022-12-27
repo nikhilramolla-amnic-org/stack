@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-valheim-server" .Release.Name | quote }}
+  labels:
+    app: {{ printf "%s-valheim-server" .Release.Name | quote }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ printf "%s-valheim-server" .Release.Name | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ printf "%s-valheim-server" .Release.Name | quote }}
+    spec:
+      containers:
+        - name: main
+          image: cm2network/valheim
+          volumeMounts:
+            - name: valheim-data
+              mountPath: /home/steam/valheim-dedicated
+          ports:
+            - containerPort: 2456
+            - containerPort: 2457
+      volumes:
+        - name: valheim-data
+          hostPath:
+            path: {{ .Values.mountPath | quote }}

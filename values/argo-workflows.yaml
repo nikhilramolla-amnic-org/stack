@@ -1,0 +1,9 @@
+server:
+  secure: false
+  extraArgs:
+    - --auth-mode=server
+    - --insecure-skip-verify
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts: ['argo.local']

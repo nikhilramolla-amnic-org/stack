@@ -1,0 +1,4 @@
+proxyInit:
+  iptablesMode: nft
+  privileged: true
+  runAsRoot: true

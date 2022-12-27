@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-csgo-server" .Release.Name | quote }}
+  labels:
+    app: {{ printf "%s-csgo-server" .Release.Name | quote }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ printf "%s-csgo-server" .Release.Name | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ printf "%s-csgo-server" .Release.Name | quote }}
+    spec:
+      containers:
+        - name: main
+          image: cm2network/csgo
+          env:
+            - name: SRCDS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ printf "%s-secrets" .Release.Name | quote }}
+                  key: srcds.token
+                  optional: true
+            - name: SRCDS_WORKSHOP_AUTHKEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ printf "%s-secrets" .Release.Name | quote }}
+                  key: srcds.workshop.authkey
+                  optional: true
+          volumeMounts:
+            - name: csgo-data
+              mountPath: /home/steam/csgo-dedicated
+          ports:
+            - containerPort: 27015
+            - containerPort: 27020
+      volumes:
+        - name: csgo-data
+          hostPath:
+            path: {{ .Values.mountPath | quote }}

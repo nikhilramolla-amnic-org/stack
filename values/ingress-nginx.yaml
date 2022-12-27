@@ -1,0 +1,6 @@
+# tcp:
+#   27015: 'csgo/csgo-csgo-server:27015'
+#   27020: 'csgo/csgo-csgo-server:27020'
+# udp:
+#   27015: 'csgo/csgo-csgo-server:27015'
+#   27020: 'csgo/csgo-csgo-server:27020'
