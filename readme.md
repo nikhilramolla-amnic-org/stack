@@ -1,5 +1,10 @@
 # Stack
 
+```bash
+brew install --cask docker
+brew install kubernetes-cli kubectx helm argo argocd k9s step
+```
+
 Enable kubernetes on docker desktop, we will use it instead of minikube.
 
 ## Repositories
