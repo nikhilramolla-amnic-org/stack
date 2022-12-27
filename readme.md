@@ -26,18 +26,27 @@ RELEASE() {
   helm upgrade --install --create-namespace "$@"
 }
 
+# linkerd control plane
 RELEASE -n linkerd linkerd-crds linkerd/linkerd-crds
 RELEASE -n linkerd linkerd-control-plane linkerd/linkerd-control-plane \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   -f values/linkerd-control-plane.yaml
+ 
+# wait until linkerd control plane is deployed
+
 RELEASE -n linkerd-viz linkerd-viz linkerd/linkerd-viz \
   -f values/linkerd-viz.yaml
+  
+# use `linkerd viz dashboard` to view dashboard
 
 RELEASE -n ingress-nginx ingress-nginx ingress-nginx/ingress-nginx \
   -f values/ingress-nginx.yaml
+  
+# add hosts file content to /etc/hosts
 
+# argo projects
 RELEASE -n argo argo-workflows argo/argo-workflows \
   -f values/argo-workflows.yaml
 RELEASE -n argo argo-cd argo/argo-cd \
@@ -45,6 +54,7 @@ RELEASE -n argo argo-cd argo/argo-cd \
 RELEASE -n argo argo-rollouts argo/argo-rollouts \
   -f values/argo-rollouts.yaml
 
+# for tcp/udp ingress controller passthrough testing
 RELEASE -n csgo csgo ./charts/csgo \
   -f values/csgo.yaml \
   -f csgo.secrets.yaml \
@@ -54,3 +64,8 @@ RELEASE -n valheim valheim ./charts/valheim \
   -f valheim.secrets.yaml \
   --set mountPath=$(pwd)/valheim-data
 ```
+
+
+# Notes
+
+Add `linkerd.io/inject: enabled` as annotation to a namespace if you want to inject proxies to its pods (also restart all its pods after editing)
