@@ -1,0 +1,33 @@
+apiVersion: v1
+entries:
+  stack:
+  - apiVersion: v2
+    created: "2023-01-06T02:35:35.700196+05:30"
+    dependencies:
+    - name: linkerd-crds
+      repository: https://helm.linkerd.io/stable
+      version: 1.4.0
+    - name: linkerd-control-plane
+      repository: https://helm.linkerd.io/stable
+      version: 1.9.5
+    - name: linkerd-viz
+      repository: https://helm.linkerd.io/stable
+      version: 30.3.5
+    - name: ingress-nginx
+      repository: https://kubernetes.github.io/ingress-nginx
+      version: 4.4.2
+    - name: argo-workflows
+      repository: https://argoproj.github.io/argo-helm
+      version: 0.22.7
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 5.16.13
+    - name: argo-rollouts
+      repository: https://argoproj.github.io/argo-helm
+      version: 2.21.1
+    digest: b75965effa71cb13ff6b0918ef9b11f9ff147f1aab85e79c417f917442655903
+    name: stack
+    urls:
+    - stack-1.0.0.tgz
+    version: 1.0.0
+generated: "2023-01-06T02:35:35.686298+05:30"
